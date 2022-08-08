@@ -31,28 +31,39 @@ class MyHomePage extends StatelessWidget {
       body: Center(
         child: BlocProvider<CounterCubit>(
           create: (context) => CounterCubit(),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                '${BlocProvider.of<CounterCubit>(context, listen: true).state.counter}',
-                style: TextStyle(
-                  fontSize: 52.0,
-                ),
-              ),
-              ElevatedButton(
-                child: Text(
-                  'Increment',
-                  style: TextStyle(fontSize: 20.0),
-                ),
-                onPressed: () {
-                  BlocProvider.of<CounterCubit>(context).increment();
-                },
-              ),
-            ],
-          ),
+          child: ChildWidget(),
         ),
       ),
+    );
+  }
+}
+
+class ChildWidget extends StatelessWidget {
+  const ChildWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          '${BlocProvider.of<CounterCubit>(context, listen: true).state.counter}',
+          style: TextStyle(
+            fontSize: 52.0,
+          ),
+        ),
+        ElevatedButton(
+          child: Text(
+            'Increment',
+            style: TextStyle(fontSize: 20.0),
+          ),
+          onPressed: () {
+            BlocProvider.of<CounterCubit>(context).increment();
+          },
+        ),
+      ],
     );
   }
 }
